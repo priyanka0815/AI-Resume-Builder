@@ -17,12 +17,16 @@ function ExperiencePreview({ resumeInfo }) {
                 }}
             />
 
-            {resumeInfo?.experience.map((experience, index) => (
+            {resumeInfo?.Experience?.map((experience, index) => (
                 <div key={index} className="my-5">
-                    <h2 className="text-sm font-bold"
-                    style={{
-                      color:resumeInfo?.themeColor
-                  }}>{experience?.title}</h2>
+                    <h2
+                        className="text-sm font-bold"
+                        style={{
+                            color: resumeInfo?.themeColor,
+                        }}
+                    >
+                        {experience?.title}
+                    </h2>
                     <h2 className="text-xs flex justify-between">
                         {experience?.companyName},{experience?.city},
                         {experience?.state}
@@ -34,7 +38,11 @@ function ExperiencePreview({ resumeInfo }) {
                         </span>
                     </h2>
                     {/* <p className="text-xs my-2">{experience?.workSummery}</p> */}
-                    <div dangerouslySetInnerHTML={{__html:experience?.workSummery}}></div>
+                    <div
+                        dangerouslySetInnerHTML={{
+                            __html: experience?.workSummary,
+                        }}
+                    ></div>
                 </div>
             ))}
         </div>

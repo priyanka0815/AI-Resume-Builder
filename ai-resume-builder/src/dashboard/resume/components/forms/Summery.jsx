@@ -27,6 +27,10 @@ const Summery = ({ enabledNext }) => {
             });
     }, [summery]);
 
+    useEffect(() => {
+        setSummery(resumeInfo?.summery);
+    }, []);
+
     const GenerateSummeryFromAI = async () => {
         setLoading(true);
         const PROMPT = prompt.replace("{jobTitle}", resumeInfo?.jobTitle);

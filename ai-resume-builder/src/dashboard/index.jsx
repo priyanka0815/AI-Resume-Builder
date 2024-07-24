@@ -32,7 +32,7 @@ const Dashboard = () => {
                 <AddResume />
                 {resumesList.length > 0 &&
                     resumesList.map((resume, index) => (
-                        <ResumeCardItem resume={resume} key={index} />
+                        <ResumeCardItem resume={resume} key={index} refreshData={GetResumesList} />
                     ))}
             </div>
         </div>

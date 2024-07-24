@@ -24,15 +24,24 @@ function Experience() {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        resumeInfo?.experience?.length > 0 &&
-            setExperinceList(resumeInfo?.experience);
+        resumeInfo?.Experience?.length > 0 &&
+            setExperinceList(resumeInfo?.Experience);
     }, []);
+
+    useEffect(() => {
+        setResumeInfo((prevResumeInfo) => ({
+            ...prevResumeInfo,
+            Experience: experinceList,
+        }));
+        console.log(experinceList);
+    }, [experinceList]);
 
     const handleChange = (index, event) => {
         const newEntries = experinceList.slice();
         const { name, value } = event.target;
+
         newEntries[index][name] = value;
-        console.log(newEntries);
+
         setExperinceList(newEntries);
     };
 
@@ -46,13 +55,15 @@ function Experience() {
                 state: "",
                 startDate: "",
                 endDate: "",
-                workSummery: "",
+                workSummary: "",
             },
         ]);
     };
 
     const RemoveExperience = () => {
-        setExperinceList((experinceList) => experinceList.slice(0, -1));
+        setExperinceList((experinceList) => {
+            return experinceList.slice(0, -1);
+        });
     };
 
     const handleRichTextEditor = (e, name, index) => {
@@ -62,22 +73,21 @@ function Experience() {
         setExperinceList(newEntries);
     };
 
-    useEffect(() => {
-        setResumeInfo({
-            ...resumeInfo,
-            Experience: experinceList,
-        });
-    }, [experinceList]);
-
     const onSave = () => {
         setLoading(true);
         const data = {
             data: {
+                ...resumeInfo,
+                id: undefined,
+                documentId: undefined,
+                createdAt: undefined,
+                updatedAt: undefined,
+                themeColor: undefined,
                 Experience: experinceList.map(({ id, ...rest }) => rest),
             },
         };
 
-        console.log(experinceList);
+        console.log(data);
 
         GlobalApi.UpdateResumeDetail(params?.resumeId, data).then(
             (res) => {
@@ -90,6 +100,7 @@ function Experience() {
             }
         );
     };
+
     return (
         <div>
             <div className="p-5 shadow-lg rounded-lg border-t-primary border-t-4 mt-10">
@@ -167,15 +178,16 @@ function Experience() {
                                         defaultValue={item?.endDate}
                                     />
                                 </div>
+
                                 <div className="col-span-2">
                                     {/* Work Summery  */}
                                     <RichtextEditor
                                         index={index}
-                                        defaultValue={item?.workSummery}
+                                        defaultValue={item?.workSummary}
                                         onRichTextEditorChange={(event) =>
                                             handleRichTextEditor(
                                                 event,
-                                                "workSummery",
+                                                "workSummary",
                                                 index
                                             )
                                         }
