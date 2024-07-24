@@ -22,6 +22,17 @@ export interface ApiUserResumeUserResume extends Struct.CollectionTypeSchema {
     jobTitle: Schema.Attribute.String;
     phone: Schema.Attribute.String;
     email: Schema.Attribute.String;
+    summery: Schema.Attribute.Text;
+    Education: Schema.Attribute.Component<
+      'education\\education.__filename__',
+      true
+    >;
+    Experience: Schema.Attribute.Component<
+      'experience\\experience.__filename__',
+      true
+    >;
+    Skills: Schema.Attribute.Component<'skills\\skills.__filename__', true>;
+    themeColor: Schema.Attribute.String & Schema.Attribute.DefaultTo<'#f66'>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -239,8 +250,8 @@ export interface PluginContentReleasesReleaseAction
   attributes: {
     type: Schema.Attribute.Enumeration<['publish', 'unpublish']> &
       Schema.Attribute.Required;
+    entry: Schema.Attribute.Relation<'morphToOne'>;
     contentType: Schema.Attribute.String & Schema.Attribute.Required;
-    entryDocumentId: Schema.Attribute.String;
     locale: Schema.Attribute.String;
     release: Schema.Attribute.Relation<
       'manyToOne',
