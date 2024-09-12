@@ -25,7 +25,7 @@ function SkillsPreview({ resumeInfo }) {
                         <h2 className="text-xs">{skill.name}</h2>
                         <div className="h-2 bg-gray-200 w-[120px]">
                             <div
-                                className="h-2"
+                                className='h-2'
                                 style={{
                                     backgroundColor: resumeInfo?.themeColor,
                                     width: skill?.rating * 20 + "%",
